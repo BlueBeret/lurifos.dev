@@ -36,7 +36,7 @@ function Navbar(props) {
             link: '/contact'
         },
     ]
-    return (<div className="w-full">
+    return (<div className="w-full h-auto">
         <nav className={`bg-transparent pl-10 flex items-center p-3 md:px-20 lg:pl-36 h-30px border-b-[2px]`}>
             <Link href="/">
                 <a className="inline-flex items-center">

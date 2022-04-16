@@ -46,5 +46,10 @@ body {
   padding: 0;
   margin: 0;
   width: 100%; 
-  height: auto;
+  height: 100%;
+}
+
+div#__next{
+  height: 100%;
+  @apply flex flex-col;
 }

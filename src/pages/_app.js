@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }) {
 
   return <>
     <Navbar />
-    <Component {...pageProps} />
+    <Component {...pageProps} className="h-full" />
   </>
 }
 
