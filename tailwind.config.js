@@ -7,12 +7,45 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: '#6558F5',
+        sblue: '#217BF4',
+        lblue: '#D4E7FE',
+        sred: '#E84C4C',
+        lred: '#FF858A',
+        syellow: '#F4A021',
+        lyellow: '#FFD085',
+        black: '#0A093D',
+        grey: '#656464'
+      },
+      keyframes: {
+        'fade-in-right': {
+          '0%': {
+            opacity: 0,
+            transform: 'translateX(-10px)'
+          },
+          "100%": {
+            opacity: '1',
+            transform: 'translateX(0)'
+          }
         },
-        secondary: '#FED103',
+        'fade-in-left': {
+          '0%': {
+            opacity: 0,
+            transform: 'translateX(10px)'
+          },
+          "100%": {
+            opacity: '1',
+            transform: 'translateX(0)'
+          }
+        }
+      },
+      animation: {
+        'fade-in-right': 'fade-in-right 1s ease-in-out',
+        'fade-in-left': 'fade-in-left 1s ease-in-out'
       }
     }
+  },
+  fontFamily: {
+    sans: "Poppins"
   },
   variants: {
     extend: {}
