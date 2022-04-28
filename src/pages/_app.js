@@ -1,7 +1,13 @@
 import '../styles/globals.css'
 import Navbar from '@/components/Navbar/Navbar'
-import { useRouter } from 'next/router'
+import { useRouter, Router } from 'next/router'
 import { useEffect } from 'react'
+import NProgress from 'nprogress'; 
+import 'nprogress/nprogress.css'; 
+
+Router.events.on('routeChangeStart', () => NProgress.start()); Router.events.on('routeChangeComplete', () => NProgress.done()); Router.events.on('routeChangeError', () => NProgress.done());
+
+
 function MyApp({ Component, pageProps }) {
 
   const router = useRouter()
@@ -18,9 +24,9 @@ function MyApp({ Component, pageProps }) {
   return <>
     <Navbar />
     <div className='flex flex-col justify-center'>
-    <Component {...pageProps} className="h-full" />
+      <Component {...pageProps} className="h-full" />
     </div>
-    
+
   </>
 }
 

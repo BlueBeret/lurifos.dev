@@ -8,6 +8,9 @@
             "@/styles/*": [
                 "src/styles/*"
             ],
+            "@/utils/*": [
+                "src/utils/*"
+            ]
         }
     }
 }
