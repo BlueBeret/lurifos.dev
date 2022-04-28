@@ -52,7 +52,8 @@ module.exports = {
         'fade-in-left': 'fade-in-left 0.5s ease-in-out',
         'fade-in-up': 'fade-in-up 0.5s ease-in-out',
         'fade-in-up-2': 'fade-in-up 1s ease-in-out',
-        'fade-in-up-3': 'fade-in-up 1.5s ease-in-out'
+        'fade-in-up-3': 'fade-in-up 1.5s ease-in-out',
+        'slide-down': 'slide-down 0.5s ease-in-out',
       }
     }
   },
