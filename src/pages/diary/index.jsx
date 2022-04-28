@@ -18,7 +18,7 @@ const Diary = () => {
 
     console.log(data)
     return (
-        <div className="bg-sblue flex-grow content px-10 pt-6 lg:mt-10 flex flex-col md:px-20 lg:px-36 justify-start items-center ">
+        <div className="content-container">
             <div className="search-bar h-[35px] w-[90%] flex flex-row justify-center">
                 <input type="text" placeholder="wanna search something?" className="bg-white rounded-l-full h-full shadow-xl pl-4 w-1/2"></input>
                 <div className="searchbutton bg-sred h-full shadow-xl rounded-r-full pl-2 pr-3"><FaSearch className="text-white h-full" /></div>

@@ -17,7 +17,10 @@ function MyApp({ Component, pageProps }) {
 
   return <>
     <Navbar />
+    <div className='flex flex-col justify-center'>
     <Component {...pageProps} className="h-full" />
+    </div>
+    
   </>
 }
 
