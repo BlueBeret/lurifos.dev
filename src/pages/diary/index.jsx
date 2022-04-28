@@ -6,8 +6,8 @@ import useSWR from 'swr'
 import sleep from '@/utils/sleep'
 import truncate from "@/utils/truncate";
 import { MdKeyboardArrowDown } from 'react-icons/md'
-import  Stairs  from "@/components/Loading/Stairs";
-
+import Stairs from "@/components/Loading/Stairs";
+import { ImNewTab } from 'react-icons/im'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
@@ -44,34 +44,45 @@ const Diary = () => {
     }
 
     const toogleBody = async (e, id) => {
-        const toggle = (e) => {
-            const elem = diary.current
-            const target = elem.querySelector(`#body-${id}`)
-            const arrow = elem.querySelector(`#arrow-${id}`)
-            arrow.classList.toggle("rotate-180")
-            target.classList.toggle('max-h-0')
-            target.classList.toggle('max-h-96')
+        switch (e.detail) {
+            case 1:
+                const toggle = (e) => {
+                    const elem = diary.current
+                    const target = elem.querySelector(`#body-${id}`)
+                    const arrow = elem.querySelector(`#arrow-${id}`)
+                    arrow.classList.toggle("rotate-180")
+                    target.classList.toggle('max-h-0')
+                    target.classList.toggle('max-h-96')
+                }
+        
+        
+                if (activeDiary === id) {
+                    setActiveDiary(null)
+                    toggle()
+                } else {
+        
+                    if (activeDiary !== null) {
+                        const elem = diary.current
+                        const target = elem.querySelector(`#body-${activeDiary}`)
+                        const arrow = elem.querySelector(`#arrow-${activeDiary}`)
+                        arrow.classList.toggle("rotate-180")
+                        target.classList.toggle('max-h-96')
+                        await sleep(200);
+        
+                    }
+        
+                    toggle()
+                    setActiveDiary(id)
+                }
+                break;
+            case 2:
+                window.open(`/diary/${id}`, '_blank')
+                break;
+            default:
+                break;
         }
 
-
-        if (activeDiary === id) {
-            setActiveDiary(null)
-            toggle()
-        } else {
-
-            if (activeDiary !== null) {
-                const elem = diary.current
-                const target = elem.querySelector(`#body-${activeDiary}`)
-                const arrow = elem.querySelector(`#arrow-${activeDiary}`)
-                arrow.classList.toggle("rotate-180")
-                target.classList.toggle('max-h-96')
-                await sleep(200);
-
-            }
-
-            toggle()
-            setActiveDiary(id)
-        }
+        
 
 
     }
@@ -84,9 +95,9 @@ const Diary = () => {
             </div>
             <div className="content flex flex-col items-start justify-center h-max mt-10 flex-grow text-left max-w-[900px] mx-auto" ref={diary}>
                 {(!data) ? <div className=""><Stairs /></div> : data.map((x, i) => {
-                    return (<div key={i} className={`transition mt-3 animate-fade-in-up duration-500 ${activeDiary === x.uuid || activeDiary === null ? '': 'opacity-50'} ${activeDiary === x.uuid ? 'scale-110':'scale-100'}` }>
+                    return (<div key={i} className={`transition mt-3 animate-fade-in-up duration-500 ${activeDiary === x.uuid || activeDiary === null ? '' : 'opacity-50'} ${activeDiary === x.uuid ? 'scale-110' : 'scale-100'}`}>
                         <div className="flex flex-row justify-start items-center gap-1 hover:cursor-pointer" onClick={(e) => toogleBody(e, x.uuid)}>
-                            <h3 className="text-md font-bold">{x.title}</h3>
+                            <h3 className="text-md font-bold noselect">{x.title}</h3>
                             <div className="flex flex-row justify-start items-center gap-1">
                                 <span className="text-gray-600">@lurifos ·</span>
                                 <span>{parseDate(x.timecreated)}</span>
@@ -97,7 +108,11 @@ const Diary = () => {
                             </div>
 
                         </div>
-                        <div id={`body-${x.uuid}`} className="transition-max-height duration-500 text-gray-600 slide overflow-clip">{truncate(x.body, 256)}{x.body.length > 256 ? <a href = {'/diary/'+x.uuid} className="text-sm text-blue-500" target='_blank' rel="noreferrer">Read More</a>:''}</div>
+                        <div id={`body-${x.uuid}`} className="transition-max-height duration-500 text-gray-600 slide overflow-clip">
+                            {truncate(x.body, 256)}
+                            <a href={'/diary/' + x.uuid} className="text-sm ml-1  text-blue-500" target='_blank' rel="noreferrer">{x.body.length > 256 ? "Read More" : ''}
+                            </a>
+                        </div>
                     </div>)
                 })}
             </div>

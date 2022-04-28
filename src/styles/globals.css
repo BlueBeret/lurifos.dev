@@ -12,7 +12,12 @@
   p {
     @apply text-grey;
     @apply font-medium;
-    @apply text-[18px];
+    @apply text-[16px];
+  }
+
+  h1 {
+    @apply text-2xl;
+    @apply font-bold;
   }
 }
 
@@ -39,6 +44,19 @@ background: linear-gradient(302.02deg, #FFB1B5 -43.05%, #FFFFFF 75.37%);
   }
   .slide {
     max-height: 0;
+  }
+  
+}
+
+@layer utilities {
+  .noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
   }
 }
 
