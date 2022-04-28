@@ -1,7 +1,7 @@
 
 import { useEffect } from "react";
 import { FaSearch } from 'react-icons/fa'
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import useSWR from 'swr'
 
 import {MdKeyboardArrowDown, MdKeyboardArrowUp} from 'react-icons/md'
@@ -10,7 +10,7 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 const Diary = () => {
     const { data, error } = useSWR('/api/diary', fetcher)
-
+    const [activeDiary, setActiveDiary] = useState(null)
     const diary = useRef(null)
     useEffect(() => {
         document.querySelector("body").classList.add("bg-grad-lred")
@@ -41,14 +41,32 @@ const Diary = () => {
     }
 
     const toogleBody = (e, id) => {
-        const elem = diary.current
+        const toggle = (e) => {
+            const elem = diary.current
+            const target = elem.querySelector(`#body-${id}`)
+            const arrow = elem.querySelector(`#arrow-${id}`)
+            arrow.classList.toggle("rotate-180")
+            target.classList.toggle('max-h-0')
+            target.classList.toggle('max-h-96')
+        }
+        if (activeDiary === id) {
+            setActiveDiary(null)
+        } else {
+            setActiveDiary(id)
+            if (activeDiary !== null) {
+                const elem = diary.current
+                const target = elem.querySelector(`#body-${activeDiary}`)
+                const arrow = elem.querySelector(`#arrow-${activeDiary}`)
+                arrow.classList.toggle("rotate-180")
+                target.classList.toggle('max-h-0')
+                target.classList.toggle('max-h-96')
+            }
 
-        const target = elem.querySelector(`#body-${id}`)
-        const arrow = elem.querySelector(`#arrow-${id}`)
-        arrow.classList.toggle("rotate-180")
-        // target.classList.toggle('hidden')
-        target.classList.toggle('max-h-0')
-        target.classList.toggle('max-h-96')
+            
+        }
+
+        toggle()
+        
     }
 
     return (
@@ -59,7 +77,7 @@ const Diary = () => {
             </div>
             <div className="content flex flex-col items-start justify-center h-max mt-10 flex-grow text-left" ref={diary}>
                 {(!data) ? <div>loading</div> : data.map((x, i) => {
-                    return (<div key={i} >
+                    return (<div key={i} className="mt-2">
                         <div className="flex flex-row justify-start items-center gap-1 hover:cursor-pointer" onClick={(e) => toogleBody(e, x.uuid)}>
                             <h3 className="text-md font-bold">{x.title}</h3>
                             <div className="flex flex-row justify-start items-center gap-1">
@@ -72,7 +90,7 @@ const Diary = () => {
                                 </div>
 
                         </div>
-                        <div id={`body-${x.uuid}`} className="transition-all duration-500 text-gray-600 max-h-0 overflow-clip">{x.body}</div>
+                        <div id={`body-${x.uuid}`} className="transition-max-height duration-500 text-gray-600 max-h-0 overflow-clip">{x.body}</div>
                     </div>)
                 })}
             </div>

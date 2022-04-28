@@ -47,6 +47,9 @@ module.exports = {
           }
         }
       },
+      transitionProperty: {
+        'max-height':'max-height',
+      },
       animation: {
         'fade-in-right': 'fade-in-right 0.5s ease-in-out',
         'fade-in-left': 'fade-in-left 0.5s ease-in-out',
