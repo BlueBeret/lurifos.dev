@@ -1,3 +1,5 @@
 {
-    "tailwindCSS.lint.invalidTailwindDirective": "warning"
+    "tailwindCSS.lint.invalidTailwindDirective": "warning",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
 }
