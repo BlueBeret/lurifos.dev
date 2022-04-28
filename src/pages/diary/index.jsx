@@ -19,8 +19,21 @@ const Diary = () => {
         document.querySelector("body").classList.add("bg-grad-lred")
     }, []);
 
-    if (error) return <div>failed to load</div>
+    const reload = (e) => {
 
+    }
+
+    if (error) return <div className="content-container items-center">
+        <div className="search-bar h-[35px] w-[90%] flex flex-row justify-center">
+            <input type="text" placeholder="wanna search something?" className="bg-white rounded-l-full h-full shadow-xl pl-4 w-1/2"></input>
+            <div className="searchbutton bg-sred h-full shadow-xl rounded-r-full pl-2 pr-3"><FaSearch className="text-white h-full" /></div>
+        </div>
+        <div className="content flex flex-col items-center justify-center h-max mt-10 flex-grow text-left max-w-[900px] mx-auto" ref={diary}>
+            <h1>Houston, we got a problem!</h1>
+            <button className="transition bg-sred text-white shadow-lg rounded-lg px-4 py-2 mt-2 hover:scale-105 font-bold" onClick={reload}>reload</button>
+
+        </div>
+    </div>
 
     const parseDate = (date) => {
         const dateObj = new Date(date)
@@ -54,13 +67,13 @@ const Diary = () => {
                     target.classList.toggle('max-h-0')
                     target.classList.toggle('max-h-96')
                 }
-        
-        
+
+
                 if (activeDiary === id) {
                     setActiveDiary(null)
                     toggle()
                 } else {
-        
+
                     if (activeDiary !== null) {
                         const elem = diary.current
                         const target = elem.querySelector(`#body-${activeDiary}`)
@@ -68,9 +81,9 @@ const Diary = () => {
                         arrow.classList.toggle("rotate-180")
                         target.classList.toggle('max-h-96')
                         await sleep(200);
-        
+
                     }
-        
+
                     toggle()
                     setActiveDiary(id)
                 }
@@ -82,7 +95,7 @@ const Diary = () => {
                 break;
         }
 
-        
+
 
 
     }
