@@ -16,6 +16,12 @@ function Navbar(props) {
         '/askme': 'bg-syellow',
         '/contact': 'bg-sblue'
     }
+    const burgerColor = {
+        '/': 'text-sblue',
+        '/diary': 'text-sred',
+        '/askme': 'text-syellow',
+        '/contact': 'text-sblue'
+    }
 
     const menu = [
         {
@@ -64,7 +70,7 @@ function Navbar(props) {
             <button className={` ${signInColor[router.pathname]} transition ml-auto inline-flex p-2 px-4 font-bold rounded-2xl text-white outline-none hover:scale-125`}>
                 Sign In
             </button>
-            <button className='text-sblue inline-flex p-2 mx-2 rounded md:hidden sm:text-primary outline-none' onClick={toogleMenu}>
+            <button className={`${burgerColor[router.pathname]} inline-flex p-2 mx-2 rounded md:hidden sm:text-primary outline-none`} onClick={toogleMenu}>
                 <svg
                     className='w-6 h-6'
                     fill='none'

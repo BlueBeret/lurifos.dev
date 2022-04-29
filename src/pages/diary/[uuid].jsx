@@ -10,7 +10,7 @@ const Diary = (props) => {
   const parseDate = (date) => {
     const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     const dateObj = new Date(date)
-    return `${month[dateObj.getMonth()]  + ' ' +dateObj.getDate()+ ',' + dateObj.getFullYear()}`
+    return `${month[dateObj.getMonth()] + ' ' + dateObj.getDate() + ',' + dateObj.getFullYear()}`
   }
   return <div className='content-container items-start max-w-[1080px]'>
     <div className='post-header flex flex-col items-start mb-5'>

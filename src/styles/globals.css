@@ -40,6 +40,7 @@ background: linear-gradient(302.02deg, #FFB1B5 -43.05%, #FFFFFF 75.37%);
   .content-container{
     @apply  flex flex-col flex-grow justify-center items-center ;
     @apply mt-5 lg:mt-10 xl:mt-14 2xl:mt-20 ;
+    @apply px-7;
     @apply sm:w-[600px] md:w-[700px] lg:w-[1000px] xl:w-[1200px] 2xl:w-[1500px]  ;
   }
   .slide {
