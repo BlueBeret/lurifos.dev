@@ -10,7 +10,10 @@
             ],
             "@/utils/*": [
                 "src/utils/*"
-            ]
+            ],
+            "@/helpers/*": [
+                "src/helpers/*"
+            ],
         }
     }
 }
