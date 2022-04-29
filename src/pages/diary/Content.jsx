@@ -69,8 +69,8 @@ const Content = ({ data }) => {
     }
 
     return (
-        <div id="scrollable-target" className="content flex flex-col items-start justify-center h-full mt-10 flex-grow text-left max-w-[900px] mx-auto px-8
-        overflow-visible" ref={diary}>
+        <div id="scrollable-target" className="content flex flex-col items-start justify-center h-full mt-10 flex-grow text-left max-w-[900px] mx-auto p-[45px]
+        overflow-y-scroll" ref={diary}>
             <InfiniteScroll
                 dataLength={posts.length}
                 next={getMorePost}
@@ -82,7 +82,7 @@ const Content = ({ data }) => {
                     height: undefined,
                     '-webkit-overflow-scrolling': undefined,
                 }}
-                className="h-40"
+                scrollableTarget="scrollable-target"
             >
                 {posts.map((x, i) => (
                     <div key={i} className={`transition mt-3 animate-fade-in-up duration-500 ${activeDiary === x.uuid || activeDiary === null ? '' : 'opacity-50'} ${activeDiary === x.uuid ? 'scale-110 z-50' : 'scale-100'}`}>
