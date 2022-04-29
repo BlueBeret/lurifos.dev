@@ -2,25 +2,46 @@
 import { useEffect } from "react";
 import { FaSearch } from 'react-icons/fa'
 import { useRef, useState } from "react";
-import useSWR from 'swr'
 import sleep from '@/utils/sleep'
 import truncate from "@/utils/truncate";
 import { MdKeyboardArrowDown } from 'react-icons/md'
 import Stairs from "@/components/Loading/Stairs";
-import { ImNewTab } from 'react-icons/im'
+import useSWR, { useSWRPages } from "swr";
+
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 const Diary = () => {
-    const { data, error } = useSWR('/api/diary/diary', fetcher)
+    const { pages, isLoadingMore, LoadMore } = useSWRPages(
+        "diary",
+        ({ offset, withSWR }) => {
+            const { data } = withSWR(
+                offset || "/api/diary", fetcher
+            )
+
+            if (!data) return null;
+            const { results } = data
+            return results.map((result) => (
+                <div key={result.uuid}>
+                    {result.title}
+                </div>
+            ));
+        },
+        (SWR) => SWR.data.next, []
+    )
+
     const [activeDiary, setActiveDiary] = useState(null)
     const diary = useRef(null)
     useEffect(() => {
         document.querySelector("body").classList.add("bg-grad-lred")
     }, []);
 
-    const reload = (e) => {
-
+    const loadMore = async () => {
+        const last = new Date(data[data.length - 1].timecreated)
+        const res = await fetcher(`/api/diary/more?last=${last}`)
+        diary.current.scrollTop = diary.current.scrollHeight
+        const content = querySelector('.content')
+        data.push(res)
     }
 
     if (error) return <div className="content-container items-center">
@@ -100,39 +121,58 @@ const Diary = () => {
 
     }
 
+    const reload = () => {
+        window.location.reload()
+    }
+
     return (
-        <div className="content-container items-center">
-            <div className="search-bar h-[35px] w-[90%] flex flex-row justify-center">
-                <input type="text" placeholder="wanna search something?" className="bg-white rounded-l-full h-full shadow-xl pl-4 w-3/4 sm:w-1/2"></input>
-                <div className="searchbutton bg-sred h-full shadow-xl rounded-r-full pl-2 pr-3"><FaSearch className="text-white h-full" /></div>
+        <section className="container mx-auto">
+            <div className="-mx-2 flex flex-wrap">{pages}</div>
+            <div className="mx-auto mt-10 mb-20 w-1/3">
+                <button
+                    className="bg-red-600 border-solid border-2 hover:bg-white border-red-600 text-white hover:text-red-600 font-bold py-2 px-4 rounded-full w-full"
+                    disabled={isLoadingMore}
+                    onClick={loadMore}
+                >
+                    Load More Pokémon
+                </button>
             </div>
-            <div className="content flex flex-col items-start justify-center h-max mt-10 flex-grow text-left max-w-[900px] mx-auto" ref={diary}>
-                {(!data) ? <div className=""><Stairs /></div> : data.map((x, i) => {
-                    return (<div key={i} className={`transition mt-3 animate-fade-in-up duration-500 ${activeDiary === x.uuid || activeDiary === null ? '' : 'opacity-50'} ${activeDiary === x.uuid ? 'scale-110' : 'scale-100'}`}>
-                        <div className="flex flex-row justify-start items-center gap-1 hover:cursor-pointer flex-wrap" onClick={(e) => toogleBody(e, x.uuid)}>
-                            <h3 className="font-bold noselect text-sm sm:text-base">{x.title}</h3>
-                            <div className="flex flex-row justify-start items-center gap-1 text-xs md:text-base mt-0">
-                                <span className="text-gray-600">@lurifos ·</span>
-                                <span>{parseDate(x.timecreated)}</span>
-                                <div className="transition duration-500 text-lg" id={`arrow-${x.uuid}`}>
-                                    <MdKeyboardArrowDown />
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <div id={`body-${x.uuid}`} className="transition-max-height duration-500 text-gray-600 slide overflow-hidden sm:overflow-clip  text-sm sm:text-base">
-                            {truncate(x.body, 256)}
-                            <a href={'/diary/' + x.uuid} className="text-sm ml-1  text-blue-500" target='_blank' rel="noreferrer">{x.body.length > 256 ? "Read More" : ''}
-                            </a>
-                        </div>
-                    </div>)
-                })}
-            </div>
-        </div>
+        </section>
     )
+
 }
 
+// return (
+//     <div className="content-container items-center">
+//         <div className="search-bar h-[35px] w-[90%] flex flex-row justify-center">
+//             <input type="text" placeholder="wanna search something?" className="bg-white rounded-l-full h-full shadow-xl pl-4 w-3/4 sm:w-1/2"></input>
+//             <div className="searchbutton bg-sred h-full shadow-xl rounded-r-full pl-2 pr-3"><FaSearch className="text-white h-full" /></div>
+//         </div>
+//         <div className="content flex flex-col items-start justify-center h-max mt-10 flex-grow text-left max-w-[900px] mx-auto" ref={diary}>
+//             {(!data) ? <div className=""><Stairs /></div> : data.map((x, i) => {
+//                 return (<div key={i} className={`transition mt-3 animate-fade-in-up duration-500 ${activeDiary === x.uuid || activeDiary === null ? '' : 'opacity-50'} ${activeDiary === x.uuid ? 'scale-110' : 'scale-100'}`}>
+//                     <div className="flex flex-row justify-start items-center gap-1 hover:cursor-pointer flex-wrap" onClick={(e) => toogleBody(e, x.uuid)}>
+//                         <h3 className="font-bold noselect text-sm sm:text-base">{x.title}</h3>
+//                         <div className="flex flex-row justify-start items-center gap-1 text-xs md:text-base mt-0">
+//                             <span className="text-gray-600">@lurifos ·</span>
+//                             <span>{parseDate(x.timecreated)}</span>
+//                             <div className="transition duration-500 text-lg" id={`arrow-${x.uuid}`}>
+//                                 <MdKeyboardArrowDown />
+//                             </div>
+//                         </div>
 
+
+//                     </div>
+//                     <div id={`body-${x.uuid}`} className="transition-max-height duration-500 text-gray-600 slide overflow-hidden sm:overflow-clip  text-sm sm:text-base">
+//                         {truncate(x.body, 256)}
+//                         <a href={'/diary/' + x.uuid} className="text-sm ml-1  text-blue-500" target='_blank' rel="noreferrer">{x.body.length > 256 ? "Read More" : ''}
+//                         </a>
+//                     </div>
+//                 </div>)
+//             })}
+//             {(data) ? <div onClick={() => loadMore()}><Stairs /></div> : ''}
+//         </div>
+//     </div>
+// )
 
 export default Diary
