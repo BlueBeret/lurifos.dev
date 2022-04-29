@@ -3,6 +3,8 @@ import { PrismaClient } from '@prisma/client'
 import ReactMarkdown from 'react-markdown'
 import gfm from 'remark-gfm'
 
+import styles from './markdown.module.css'
+
 
 const Diary = (props) => {
   const diary = props.data[0]
@@ -12,6 +14,7 @@ const Diary = (props) => {
     const dateObj = new Date(date)
     return `${month[dateObj.getMonth()] + ' ' + dateObj.getDate() + ',' + dateObj.getFullYear()}`
   }
+
   return <div className='content-container items-start max-w-[1080px]'>
     <div className='post-header flex flex-col items-start mb-5'>
       <h1>{diary.title}</h1>
@@ -19,8 +22,11 @@ const Diary = (props) => {
         <span>{parseDate(diary.timecreated)}</span>
       </div>
     </div>
-    <div className='post-body text-black'>
-      <ReactMarkdown remarkPlugins={[gfm]} >{diary.body}</ReactMarkdown>
+
+
+    <div className={styles.body}>
+      <ReactMarkdown remarkPlugins={[gfm]}
+      >{diary.body}</ReactMarkdown>
     </div>
     <span className='text-grey mt-1'>LastEdit: {parseDate(diary.lastedited)}</span>
   </div>
