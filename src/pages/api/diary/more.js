@@ -16,7 +16,6 @@ export default async function handler(req, res) {
             take: 10
         }
     )
-
     data.map(x => {
         x.timecreated = x.timecreated.toString()
         x.lastedited = x.lastedited.toString()
