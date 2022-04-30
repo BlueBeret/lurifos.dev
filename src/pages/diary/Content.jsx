@@ -92,6 +92,8 @@ const Content = ({ data }) => {
                     '-webkit-overflow-scrolling': undefined,
                 }}
                 scrollableTarget="scrollable-target"
+
+                className={styles.scrollable}
             >
                 {posts.map((x, i) => (
                     <div key={i} className={`transition mt-3 animate-fade-in-up duration-500 ${activeDiary === x.uuid || activeDiary === null ? '' : 'opacity-20'} ${activeDiary === x.uuid ? 'scale-110 z-50' : 'scale-100'}`}>
