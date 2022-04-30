@@ -2,6 +2,7 @@
     position: relative;
     width: 75px;
     height: 100px;
+    @appy 'mx-auto'
   }
   .loader__bar {
     position: absolute;

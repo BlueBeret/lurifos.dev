@@ -8,6 +8,7 @@ import truncate from "@/utils/truncate";
 import ReactMarkdown from "react-markdown";
 import gfm from 'remark-gfm'
 import styles from './Content.module.css'
+import Image from "next/image";
 
 const Content = ({ data }) => {
     const [posts, setPosts] = useState(data);
@@ -73,14 +74,18 @@ const Content = ({ data }) => {
     return (
         <div id="scrollable-target" className="content 
         content-diary-mobile sm:content-diary
-        flex flex-col items-start justify-center text-left max-w-[900px] mx-auto p-[45px]
+        flex flex-col items-start text-left max-w-[900px] mx-auto p-[45px]
         overflow-y-auto
         " ref={diary}>
             <InfiniteScroll
                 dataLength={posts.length}
                 next={getMorePost}
                 hasMore={hasMore}
-                loader={<div className=""><Stairs /></div>}
+                loader={
+                    <div className="mx-auto w-min">
+                        <Stairs />
+                    </div>
+                }
                 style={{
                     overflow: undefined,
                     height: undefined,
@@ -115,6 +120,7 @@ const Content = ({ data }) => {
                     </div>
                 ))}
             </InfiniteScroll>
+            {!hasMore ? <NoMore /> : ""}
         </div>
     );
 };
@@ -145,4 +151,12 @@ const parseDate = (date) => {
 const ReadMore = ({ x }) => {
 
     return <a href={'/diary/' + x.uuid} className="text-sm text-blue-500" target='_blank' rel="noreferrer"> Read More </a>
+}
+
+const NoMore = () => {
+    return <div>
+        <Image src="/images/treasure.png" height="107" width="200" alt="treasure" ></Image>
+        <p>You&apos;ve reached the end, enjoy this treasure.</p>
+
+    </div>
 }
