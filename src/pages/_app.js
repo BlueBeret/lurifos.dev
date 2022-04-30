@@ -39,7 +39,7 @@ function MyApp({ Component, pageProps }) {
     </Head>
     <Navbar />
     <div className='flex flex-col justify-center'>
-      <Component {...pageProps} className="h-full" />
+      <Component {...pageProps} className="" />
     </div>
 
   </>

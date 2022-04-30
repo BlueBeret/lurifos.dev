@@ -46,6 +46,15 @@ background: linear-gradient(302.02deg, #FFB1B5 -43.05%, #FFFFFF 75.37%);
   .slide {
     max-height: 0;
   }
+
+  .content-diary-mobile{
+    height: calc(100vh - 250px);
+    @apply  mt-10;
+  }
+  .content-diary{
+    height: calc(100vh - 250px);
+    @apply  mt-10;
+  }
   
 }
 
@@ -58,6 +67,11 @@ background: linear-gradient(302.02deg, #FFB1B5 -43.05%, #FFFFFF 75.37%);
           -ms-user-select: none; /* Internet Explorer/Edge */
               user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome, Edge, Opera and Firefox */
+  }
+
+  .fillheight{
+    max-height: -webkit-fill-available;
+    max-height: -moz-available;
   }
 }
 

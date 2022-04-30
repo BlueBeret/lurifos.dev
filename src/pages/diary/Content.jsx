@@ -5,7 +5,9 @@ import { MdKeyboardArrowDown } from 'react-icons/md'
 import Stairs from "@/components/Loading/Stairs";
 import sleep from '@/utils/sleep'
 import truncate from "@/utils/truncate";
-
+import ReactMarkdown from "react-markdown";
+import gfm from 'remark-gfm'
+import styles from './Content.module.css'
 
 const Content = ({ data }) => {
     const [posts, setPosts] = useState(data);
@@ -69,14 +71,16 @@ const Content = ({ data }) => {
     }
 
     return (
-        <div id="scrollable-target" className="content flex flex-col items-start justify-center h-full mt-10 flex-grow text-left max-w-[900px] mx-auto p-[45px]
-        overflow-y-scroll" ref={diary}>
+        <div id="scrollable-target" className="content 
+        content-diary-mobile sm:content-diary
+        flex flex-col items-start justify-center text-left max-w-[900px] mx-auto p-[45px]
+        overflow-y-scroll
+        " ref={diary}>
             <InfiniteScroll
                 dataLength={posts.length}
                 next={getMorePost}
                 hasMore={hasMore}
                 loader={<div className=""><Stairs /></div>}
-                endMessage={<h4>Nothing more to show</h4>}
                 style={{
                     overflow: undefined,
                     height: undefined,
@@ -86,7 +90,9 @@ const Content = ({ data }) => {
             >
                 {posts.map((x, i) => (
                     <div key={i} className={`transition mt-3 animate-fade-in-up duration-500 ${activeDiary === x.uuid || activeDiary === null ? '' : 'opacity-50'} ${activeDiary === x.uuid ? 'scale-110 z-50' : 'scale-100'}`}>
-                        <div className="flex flex-row justify-start items-center gap-1 hover:cursor-pointer flex-wrap" onClick={(e) => toogleBody(e, x.uuid)}>
+                        <div className="flex sm:flex-row sm:justify-start sm:items-center gap-1 hover:cursor-pointer flex-wrap
+                        flex-col justify-center items-start
+                        " onClick={(e) => toogleBody(e, x.uuid)}>
                             <h3 className="font-bold noselect text-sm sm:text-base">{x.title}</h3>
                             <div className="flex flex-row justify-start items-center gap-1 text-xs md:text-base mt-0">
                                 <span className="text-gray-600">@lurifos ·</span>
@@ -99,9 +105,12 @@ const Content = ({ data }) => {
 
                         </div>
                         <div id={`body-${x.uuid}`} className="transition-max-height duration-500 text-gray-600 slide overflow-hidden sm:overflow-clip text-sm sm:text-base">
-                            {truncate(x.body, 256)}
-                            <a href={'/diary/' + x.uuid} className="text-sm ml-1  text-blue-500" target='_blank' rel="noreferrer">{x.body.length > 256 ? "Read More" : ''}
-                            </a>
+
+                            <ReactMarkdown remarkPlugins={[gfm]} className={styles.body}>
+                                {truncate(x.body, 256)}
+                            </ReactMarkdown>
+                            {x.body.length > 256 ? <ReadMore x={x} /> : ''}
+
                         </div>
                     </div>
                 ))}
@@ -131,4 +140,9 @@ const parseDate = (date) => {
     }
 
     return `${dateObj.toLocaleDateString()}`
+}
+
+const ReadMore = ({ x }) => {
+
+    return <a href={'/diary/' + x.uuid} className="text-sm text-blue-500" target='_blank' rel="noreferrer"> Read More </a>
 }

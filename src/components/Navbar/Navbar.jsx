@@ -92,7 +92,9 @@ function Navbar(props) {
                 md:hidden
                 flex flex-col justify-center 
                 transition-all duration-300 ease
-                
+                fixed
+                bg-white z-50
+                w-full
                 `}>
             {
                 menu.map((item, index) => {
