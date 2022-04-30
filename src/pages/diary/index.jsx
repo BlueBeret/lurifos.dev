@@ -16,7 +16,6 @@ export default function Index(props) {
                 <input type="text" placeholder="wanna search something?" className="bg-white rounded-l-full h-full shadow-xl pl-4 w-3/4 sm:w-1/2"></input>
                 <div className="searchbutton bg-sred h-full shadow-xl rounded-r-full pl-2 pr-3"><FaSearch className="text-white h-full" /></div>
             </div>
-
             <Content data={props.data} />
         </div>
     );

@@ -94,7 +94,7 @@ const Content = ({ data }) => {
                 scrollableTarget="scrollable-target"
             >
                 {posts.map((x, i) => (
-                    <div key={i} className={`transition mt-3 animate-fade-in-up duration-500 ${activeDiary === x.uuid || activeDiary === null ? '' : 'opacity-50'} ${activeDiary === x.uuid ? 'scale-110 z-50' : 'scale-100'}`}>
+                    <div key={i} className={`transition mt-3 animate-fade-in-up duration-500 ${activeDiary === x.uuid || activeDiary === null ? '' : 'opacity-20'} ${activeDiary === x.uuid ? 'scale-110 z-50' : 'scale-100'}`}>
                         <div className="flex sm:flex-row sm:justify-start sm:items-center gap-1 hover:cursor-pointer flex-wrap
                         flex-col justify-center items-start
                         " onClick={(e) => toogleBody(e, x.uuid)}>
