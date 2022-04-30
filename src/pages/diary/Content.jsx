@@ -74,7 +74,7 @@ const Content = ({ data }) => {
         <div id="scrollable-target" className="content 
         content-diary-mobile sm:content-diary
         flex flex-col items-start justify-center text-left max-w-[900px] mx-auto p-[45px]
-        overflow-y-scroll
+        overflow-y-auto
         " ref={diary}>
             <InfiniteScroll
                 dataLength={posts.length}

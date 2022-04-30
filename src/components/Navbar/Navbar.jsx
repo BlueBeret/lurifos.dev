@@ -2,6 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { route } from "next/dist/server/router";
 
 
 function Navbar(props) {
@@ -16,6 +17,14 @@ function Navbar(props) {
         '/askme': 'bg-syellow',
         '/contact': 'bg-sblue'
     }
+
+    const botnavColor = {
+        '/': 'bg-white',
+        '/diary': 'bg-white',
+        '/askme': 'bg-lyellow',
+        '/contact': 'bg-lblue'
+    }
+
     const burgerColor = {
         '/': 'text-sblue',
         '/diary': 'text-sred',
@@ -93,7 +102,9 @@ function Navbar(props) {
                 flex flex-col justify-center 
                 transition-all duration-300 ease
                 fixed
-                bg-white z-50
+                backdrop-blur-md
+                
+                 z-50
                 w-full
                 `}>
             {
