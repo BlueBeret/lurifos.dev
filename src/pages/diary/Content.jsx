@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useRef } from 'react'
 import { MdKeyboardArrowDown } from 'react-icons/md'
-import Stairs from "@/components/Loading/Stairs";
+import Stairs from "@/components/loading/Stairs";
 import sleep from '@/utils/sleep'
 import truncate from "@/utils/truncate";
 import ReactMarkdown from "react-markdown";

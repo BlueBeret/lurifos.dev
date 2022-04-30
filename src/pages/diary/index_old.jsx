@@ -6,7 +6,7 @@ import useSWR from 'swr'
 import sleep from '@/utils/sleep'
 import truncate from "@/utils/truncate";
 import { MdKeyboardArrowDown } from 'react-icons/md'
-import Stairs from "@/components/Loading/Stairs";
+import Stairs from "@/components/loading/Stairs";
 import { ImNewTab } from 'react-icons/im'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
