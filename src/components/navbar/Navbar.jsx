@@ -51,7 +51,7 @@ function Navbar(props) {
         },
     ]
     return (<div className="w-full h-auto">
-        <nav className={`bg-transparent pl-10 flex items-center p-3 md:px-20 lg:pl-36 h-30px border-b-[2px]`}>
+        <nav className={`bg-transparent pl-10 flex items-center py-0 sm:py-3 px-3 md:px-20 lg:pl-36 h-30px border-b-[2px]`}>
             <Link href="/">
                 <a className="inline-flex items-center">
                     <Image src="/navbrand.png" height={50} width={50} layout="fixed" alt="logo" />

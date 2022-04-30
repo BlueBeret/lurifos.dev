@@ -7,7 +7,8 @@ export default function ContactCard({ data }) {
     }
 
     return (
-        <div className={`transition duration-500 group flex flex-row bg-white rounded-lg items-center p-4 gap-4 w-[260px] sm:w-[400px] h-[150px]
+        <div className={`transition duration-500 group flex flex-row bg-white rounded-lg items-center p-4 gap-4 
+        w-[260px] sm:w-[400px] h-[100px] sm:h-[150px]
         shadow-xl
         hover:cursor-pointer
         group-hover:text-white ${data.bg_color}`} onClick={(e) => click(data.link)}>

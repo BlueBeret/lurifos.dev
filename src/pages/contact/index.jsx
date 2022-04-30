@@ -50,7 +50,7 @@ const Contact = () => {
             <h1 className="p-3 text-4xl">
                 Contact
             </h1>
-            <div className="flex flex-row flex-wrap  justify-center items-center gap-10 mt-10 max-h-[60vh]
+            <div className="flex flex-row flex-wrap  justify-center items-center gap-10 mt-2 sm:mt-10 max-h-[60vh]
             overflow-auto">
                 {contactData.map((item, index) => {
 
