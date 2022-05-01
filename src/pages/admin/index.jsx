@@ -12,7 +12,7 @@ const AdminPage = () => {
         const res = await fetch('/api/diary/adddiary', {
             method: 'POST',
             body: JSON.stringify({
-                dtitle : title,
+                dtitle: title,
                 dbody: body,
                 secret: secret
             }),
@@ -20,7 +20,7 @@ const AdminPage = () => {
                 'Content-Type': 'application/json',
             }
         })
-        if(res.status === 200) {
+        if (res.status === 200) {
             setTitle('')
             setBody('')
         }
@@ -29,13 +29,13 @@ const AdminPage = () => {
         <div className="bg-black text-black w-min p-5">
             <form>
 
-            
-            <input type="text" name="title" placeholder="title" value={title} onChange={e => setTitle(e.target.value)} />
-            <input type="password" name="secret" placeholder='secret' value={secret} onChange={e => setSecret(e.target.value)} />
+
+                <input type="text" name="title" placeholder="title" value={title} onChange={e => setTitle(e.target.value)} />
+                <input type="password" name="secret" placeholder='secret' value={secret} onChange={e => setSecret(e.target.value)} />
                 <textarea name="body" placeholder="body" className="h-[200px]" value={body} onChange={e => setBody(e.target.value)} />
-                </form>
-                <br></br>
-            <button onClick={ handleClick} className="bg-white">Submit</button>
+            </form>
+            <br></br>
+            <button onClick={handleClick} className="bg-white">Submit</button>
         </div>
     );
 }
