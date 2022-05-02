@@ -5,12 +5,13 @@ import { useEffect } from 'react'
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import Head from 'next/head'
+import { SessionProvider } from 'next-auth/react'
 
 NProgress.configure({ showSpinner: false });
 Router.events.on('routeChangeStart', () => NProgress.start()); Router.events.on('routeChangeComplete', () => NProgress.done()); Router.events.on('routeChangeError', () => NProgress.done());
 
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
   const router = useRouter()
 
@@ -37,10 +38,14 @@ function MyApp({ Component, pageProps }) {
       <meta name="description" content="Hello there, I am Lurifos and welcome to my playground. I'm a computer science student who love math." />
       <link rel="icon" href="/favicon.ico" />
     </Head>
-    <Navbar />
-    <div className='flex flex-col justify-center'>
-      <Component {...pageProps} className="" />
-    </div>
+
+    <SessionProvider session={session}>
+      <Navbar />
+      <div className='flex flex-col justify-center'>
+
+        <Component {...pageProps} className="" />
+      </div>
+    </SessionProvider>
 
   </>
 }

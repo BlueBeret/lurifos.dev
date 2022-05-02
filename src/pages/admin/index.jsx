@@ -1,8 +1,7 @@
-
-
+import { getSession } from "next-auth/react"
 import { useState } from 'react'
 
-const AdminPage = () => {
+const AdminPage = ({ user }) => {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
     const [secret, setSecret] = useState('')
@@ -25,19 +24,44 @@ const AdminPage = () => {
             setBody('')
         }
     }
-    return (
-        <div className="bg-black text-black w-min p-5">
-            <form>
+    if (user) {
+        return (
+            <div className="bg-black text-black w-min p-5">
+                <form>
 
 
-                <input type="text" name="title" placeholder="title" value={title} onChange={e => setTitle(e.target.value)} />
-                <input type="password" name="secret" placeholder='secret' value={secret} onChange={e => setSecret(e.target.value)} />
-                <textarea name="body" placeholder="body" className="h-[200px]" value={body} onChange={e => setBody(e.target.value)} />
-            </form>
-            <br></br>
-            <button onClick={handleClick} className="bg-white">Submit</button>
-        </div>
-    );
+                    <input type="text" name="title" placeholder="title" value={title} onChange={e => setTitle(e.target.value)} />
+                    <input type="password" name="secret" placeholder='secret' value={secret} onChange={e => setSecret(e.target.value)} />
+                    <textarea name="body" placeholder="body" className="h-[200px]" value={body} onChange={e => setBody(e.target.value)} />
+                </form>
+                <br></br>
+                <button onClick={handleClick} className="bg-white">Submit</button>
+            </div>
+        );
+    }
 }
 
-export default AdminPage
+export async function getServerSideProps(context) {
+    const session = await getSession(context)
+    if (!session) {
+        context.res.writeHead(302, { Location: '/' })
+        context.res.end()
+        return {
+            props: {}
+        }
+    } else if (session.user.email !== process.env.ADMIN_EMAIL) {
+        context.res.writeHead(302, { Location: '/' })
+        context.res.end()
+        return {
+            props: {}
+        }
+    } else {
+        return {
+            props: {
+                user: session.user
+            }
+        }
+    }
+}
+
+export default AdminPage;

@@ -1,12 +1,12 @@
 import crypto from 'crypto';
 import { PrismaClient } from "@prisma/client"
+import { getSession } from 'next-auth/react';
 
 export default async function handler(req, res) {
-    
+    const session = await getSession({ req });
+    if (req.method === "POST" && crypto.createHash('sha512').update(req.body.secret).digest('hex') === process.env.SECRET && session.user.email === process.env.ADMIN_EMAIL) {
 
-    if (req.method === "POST" && crypto.createHash('sha512').update(req.body.secret).digest('hex') === process.env.SECRET) {
 
-    
         const prisma = new PrismaClient()
 
         const dtitle = req.body.dtitle
@@ -17,6 +17,6 @@ export default async function handler(req, res) {
         await prisma.$disconnect()
         res.status(200).send(result)
     } else {
-        res.status(405).send('Method Not Allowed')
+        res.status(404).redirect('/')
     }
 }

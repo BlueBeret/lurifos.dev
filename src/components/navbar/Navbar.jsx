@@ -2,11 +2,13 @@ import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 
 function Navbar(props) {
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false);
+    const { data: session, status } = useSession()
     const toogleMenu = () => {
         setIsOpen(!isOpen);
     }
@@ -15,13 +17,6 @@ function Navbar(props) {
         '/diary': 'bg-sred',
         '/askme': 'bg-syellow',
         '/contact': 'bg-sblue'
-    }
-
-    const botnavColor = {
-        '/': 'bg-white',
-        '/diary': 'bg-white',
-        '/askme': 'bg-lyellow',
-        '/contact': 'bg-lblue'
     }
 
     const burgerColor = {
@@ -48,7 +43,7 @@ function Navbar(props) {
             name: 'Contact',
             alias: '/contact',
             link: '/contact'
-        },
+        }
     ]
     return (<div className="w-full h-auto">
         <nav className={`bg-transparent pl-10 flex items-center py-0 sm:py-3 px-3 md:px-20 lg:pl-36 h-30px border-b-[2px]`}>
@@ -75,9 +70,12 @@ function Navbar(props) {
                     })
                 }
             </div>
-            <button className={` ${signInColor[router.pathname]} transition ml-auto inline-flex p-2 px-4 font-bold rounded-2xl text-white outline-none hover:scale-125`}>
+            {status == 'authenticated' ? <button onClick={() => signOut()} className={` ${signInColor[router.pathname] ? signInColor[router.pathname] : 'bg-black'} transition ml-auto inline-flex p-2 px-4 font-bold rounded-2xl text-white outline-none hover:scale-125`}>
+                Sign Out
+            </button> : <button onClick={() => signIn()} className={` ${signInColor[router.pathname] ? signInColor[router.pathname] : 'bg-black'} transition ml-auto inline-flex p-2 px-4 font-bold rounded-2xl text-white outline-none hover:scale-125`}>
                 Sign In
-            </button>
+            </button>}
+
             <button className={`${burgerColor[router.pathname]} inline-flex p-2 mx-2 rounded md:hidden sm:text-primary outline-none`} onClick={toogleMenu}>
                 <svg
                     className='w-6 h-6'
