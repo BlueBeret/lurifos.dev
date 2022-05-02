@@ -6,7 +6,7 @@ export default function SignIn({ providers }) {
         window.location.replace("/")
     }
     else return (
-        <>
+        <div className="content-container">
             {Object.values(providers).map((provider) => (
                 <div key={provider.name}>
                     <button onClick={() => signIn(provider.id)}>
@@ -14,7 +14,7 @@ export default function SignIn({ providers }) {
                     </button>
                 </div>
             ))}
-        </>
+        </div>
     )
 }
 
