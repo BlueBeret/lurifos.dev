@@ -9,7 +9,6 @@ export default async function handler(req, res) {
     })
 
     const query = searchWords.join(" | ")
-    console.log(query)
     const data = await prisma.diary.findMany(
         {
             where: {

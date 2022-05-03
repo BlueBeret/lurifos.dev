@@ -10,7 +10,7 @@ import gfm from 'remark-gfm'
 import styles from './Content.module.css'
 import Image from "next/image";
 
-const Content = ({ data }) => {
+const Content = ({ data, searchresult, back }) => {
     const [posts, setPosts] = useState(data);
     const [hasMore, setHasMore] = useState(true);
     const [activeDiary, setActiveDiary] = useState(null)
@@ -79,12 +79,13 @@ const Content = ({ data }) => {
         " ref={diary}>
             <InfiniteScroll
                 dataLength={posts.length}
-                next={getMorePost}
+                next={!searchresult ? getMorePost : ''}
                 hasMore={hasMore}
-                loader={
+                loader={!searchresult ?
                     <div className="mx-auto w-min">
                         <Stairs />
                     </div>
+                    : ''
                 }
                 style={{
                     overflow: undefined,
@@ -95,6 +96,9 @@ const Content = ({ data }) => {
 
                 className={styles.scrollable}
             >
+                {searchresult && posts.length > 0 && <ResultInfoCounter n={posts.length} />}
+                {posts.length === 0 && <div className="flex flex-col items-center"><Image src="/images/nothingfound.png" className="w-0 lg:w-1/2" height={400} width={400} alt="nothing found" />
+                </div>}
                 {posts.map((x, i) => (
                     <div key={i} className={`transition mt-3 animate-fade-in-up duration-500 ${activeDiary === x.uuid || activeDiary === null ? '' : 'opacity-20'} ${activeDiary === x.uuid ? 'scale-110 z-50' : 'scale-100'}`}>
                         <div className="flex sm:flex-row sm:justify-start sm:items-center gap-0 sm:gap-1 hover:cursor-pointer flex-wrap
@@ -122,6 +126,10 @@ const Content = ({ data }) => {
                         </div>
                     </div>
                 ))}
+                {searchresult && <div className="flex flex-col items-center">
+
+                    <button className="transition bg-sred rounded-lg px-2 py-1 mt-5 text-white font-semibold hover:scale-110" onClick={back}>Go Back</button>
+                </div>}
             </InfiniteScroll>
             {!hasMore ? <NoMore /> : ""}
         </div>
@@ -161,5 +169,16 @@ const NoMore = () => {
         <Image src="/images/treasure.png" height="107" width="200" alt="treasure" ></Image>
         <p>You&apos;ve reached the end, enjoy this treasure.</p>
 
+    </div>
+}
+
+const ResultInfoCounter = ({ n }) => {
+    var diary = 'diaries'
+    if (n === 1) {
+        diary = 'diary'
+    }
+
+    return <div>
+        {`Found ${n} ${diary}:`}
     </div>
 }
