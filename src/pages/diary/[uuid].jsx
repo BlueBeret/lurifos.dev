@@ -1,19 +1,27 @@
 
 import { PrismaClient } from '@prisma/client'
 import ReactMarkdown from 'react-markdown'
+import Head from 'next/head'
 import gfm from 'remark-gfm'
 
 import styles from './markdown.module.css'
+import { data } from 'autoprefixer'
 
 
 const Diary = (props) => {
   const diary = props.data.length > 0 ? props.data[0] : {
+    uuid: 'h3llo-world',
     title: 'Oh no!',
     body: `No diary found! Are you lost?  
     Let's get back to [diary](/diary)  
     If you think this is an error, please let [me](/contact) know.`,
     timecreated: 'December 16, 1991',
     lastedited: 'December 16, 1991',
+  }
+
+  const copyuuid = () => {
+    navigator.clipboard.writeText(diary.uuid)
+    alert('Copied to clipboard!')
   }
 
   const parseDate = (date) => {
@@ -36,6 +44,9 @@ const Diary = (props) => {
   }
 
   return <div className='content-container items-start max-w-[1080px]'>
+    <Head>
+      <title>{diary.title}</title>
+    </Head>
     <div className='post-header flex flex-col items-start mb-5'>
       <h1>{diary.title}</h1>
       <div className='flex flex-col text-grey'>
@@ -48,7 +59,11 @@ const Diary = (props) => {
       <ReactMarkdown remarkPlugins={[gfm]}
       >{diary.body}</ReactMarkdown>
     </div>
-    <span className='text-grey mt-1'>LastEdit: {parseDate(diary.lastedited)}</span>
+    <div className='flex flex-col'>
+      <span className='text-grey mt-1'>LastEdit: {parseDate(diary.lastedited)}</span>
+      <span className='text-grey hover:cursor-pointer' onClick={(e) => copyuuid()}>{diary.uuid}</span>
+    </div>
+
   </div>
 }
 
