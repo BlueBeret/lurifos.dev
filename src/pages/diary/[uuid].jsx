@@ -3,9 +3,8 @@ import { PrismaClient } from '@prisma/client'
 import ReactMarkdown from 'react-markdown'
 import Head from 'next/head'
 import gfm from 'remark-gfm'
-
 import styles from './markdown.module.css'
-import { data } from 'autoprefixer'
+import toast, { Toaster } from 'react-hot-toast'
 
 
 const Diary = (props) => {
@@ -21,7 +20,11 @@ const Diary = (props) => {
 
   const copyuuid = () => {
     navigator.clipboard.writeText(diary.uuid)
-    alert('Copied to clipboard!')
+    toast('uuid copied to clipboard!', {
+      duration: 4000,
+      position: 'top-right',
+      type: 'success',
+    })
   }
 
   const parseDate = (date) => {
@@ -61,9 +64,9 @@ const Diary = (props) => {
     </div>
     <div className='flex flex-col'>
       <span className='text-grey mt-1'>LastEdit: {parseDate(diary.lastedited)}</span>
-      <span className='text-grey hover:cursor-pointer' onClick={(e) => copyuuid()}>{diary.uuid}</span>
+      <span title="click to copy" className='text-grey hover:cursor-pointer' onClick={(e) => copyuuid()}>{diary.uuid}</span>
     </div>
-
+    <Toaster />
   </div>
 }
 
