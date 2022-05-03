@@ -1,6 +1,6 @@
 
 import getLatestDiary from "@/helpers/getLatestDiary";
-import Content from "./Content";
+import Content from "@/components/diary/Content";
 import { FaSearch } from 'react-icons/fa'
 import { useEffect, useState } from "react";
 import Stairs from "@/components/loading/Stairs";
