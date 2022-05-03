@@ -5,6 +5,8 @@ import { FaSearch } from 'react-icons/fa'
 import { useEffect, useState } from "react";
 import Stairs from "@/components/loading/Stairs";
 
+import toast, { Toaster } from "react-hot-toast";
+
 export default function Index(props) {
     const [searchQuery, setSearchQuery] = useState('')
     const [searchResult, setSearchResult] = useState([])
@@ -29,6 +31,18 @@ export default function Index(props) {
 
     useEffect(() => {
         document.querySelector("body").classList.add("bg-grad-lred")
+        console.log('hello')
+        toast(
+            <div>
+
+                <div className="text-sm">Click at diary title to expand or double click to open in new tab.</div>
+            </div>
+
+            , {
+                icon: <div className="font-bold">ProTip!</div>,
+                position: "bottom-center",
+                duration: 15000
+            })
     }, []);
 
     return (
@@ -48,7 +62,7 @@ export default function Index(props) {
                 {contentDispay === "search_result" && <Content key={searchResult} data={searchResult} searchresult={true} back={() => setContentDispay('diary')} />}
                 {contentDispay === "diary" && <Content data={props.data} />}
             </div>
-
+            <Toaster />
 
         </div>
     );

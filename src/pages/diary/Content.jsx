@@ -169,7 +169,7 @@ const ReadMore = ({ x }) => {
 }
 
 const NoMore = () => {
-    return <div>
+    return <div className="transition animate-fade-in-up duration-500">
         <Image src="/images/treasure.png" height="107" width="200" alt="treasure" ></Image>
         <p>You&apos;ve reached the end, enjoy this treasure.</p>
 
