@@ -17,9 +17,22 @@ const Diary = (props) => {
   }
 
   const parseDate = (date) => {
+    function formatAMPM(date) {
+      var hours = date.getHours();
+      var minutes = date.getMinutes();
+      var ampm = hours >= 12 ? 'pm' : 'am';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      var strTime = hours + ':' + minutes + ' ' + ampm;
+      return strTime;
+    }
+
+
+
     const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     const dateObj = new Date(date)
-    return `${month[dateObj.getMonth()] + ' ' + dateObj.getDate() + ', ' + dateObj.getFullYear()}`
+    return `${month[dateObj.getMonth()] + ' ' + dateObj.getDate() + ', ' + dateObj.getFullYear() + ' at ' + formatAMPM(dateObj)}`
   }
 
   return <div className='content-container items-start max-w-[1080px]'>

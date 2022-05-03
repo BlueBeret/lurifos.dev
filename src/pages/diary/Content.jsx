@@ -97,8 +97,9 @@ const Content = ({ data }) => {
             >
                 {posts.map((x, i) => (
                     <div key={i} className={`transition mt-3 animate-fade-in-up duration-500 ${activeDiary === x.uuid || activeDiary === null ? '' : 'opacity-20'} ${activeDiary === x.uuid ? 'scale-110 z-50' : 'scale-100'}`}>
-                        <div className="flex sm:flex-row sm:justify-start sm:items-center gap-1 hover:cursor-pointer flex-wrap
+                        <div className="flex sm:flex-row sm:justify-start sm:items-center gap-0 sm:gap-1 hover:cursor-pointer flex-wrap
                         flex-col justify-center items-start
+                        break-words
                         " onClick={(e) => toogleBody(e, x.uuid)}>
                             <h3 className="font-bold noselect text-sm sm:text-base">{x.title}</h3>
                             <div className="flex flex-row justify-start items-center gap-1 text-xs md:text-base mt-0">
