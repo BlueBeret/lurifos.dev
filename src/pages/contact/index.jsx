@@ -51,7 +51,7 @@ const Contact = () => {
                 Contact
             </h1>
             <div className="flex flex-row flex-wrap  justify-center items-center gap-10 mt-2 sm:mt-10 max-h-[60vh]
-            overflow-auto">
+            overflow-auto max-w-[1080px]">
                 {contactData.map((item, index) => {
 
                     return (<ContactCard data={item} key={index} />)

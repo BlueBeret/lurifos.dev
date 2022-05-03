@@ -20,13 +20,19 @@
 }
 
 .customscroll::-webkit-scrollbar{
-    width: 5px;
+    width: 7px;
     height: 0px;
 }
 .customscroll::-webkit-scrollbar-thumb {
+    background-color: #FF858A;
+    border-radius: 999px;
+}
+
+.customscroll::-webkit-scrollbar-thumb:hover {
     background-color: #E84C4C;
     border-radius: 999px;
 }
+
 .customscroll::-webkit-scrollbar-track {
     background-color: transparent;
 }
