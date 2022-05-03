@@ -74,7 +74,8 @@ const Content = ({ data, searchresult, back }) => {
     return (
         <div id="scrollable-target" className="content 
         content-diary-mobile sm:content-diary
-        flex flex-col items-start text-left max-w-[900px] mx-auto p-7 sm:p-[45px]
+        flex flex-col items-start justify-start text-left 
+        max-w-[900px] mx-auto w-full p-7 sm:p-[45px]
         overflow-y-auto
         " ref={diary}>
             <InfiniteScroll
@@ -126,12 +127,13 @@ const Content = ({ data, searchresult, back }) => {
                         </div>
                     </div>
                 ))}
-                {searchresult && <div className="flex flex-col items-center">
 
-                    <button className="transition bg-sred rounded-lg px-2 py-1 mt-5 text-white font-semibold hover:scale-110" onClick={back}>Go Back</button>
-                </div>}
             </InfiniteScroll>
             {!hasMore ? <NoMore /> : ""}
+            {searchresult && <div className="flex flex-col items-center w-full">
+
+                <button className="transition bg-sred rounded-lg px-2 py-1 mt-5 text-white font-semibold hover:scale-110" onClick={back}>Go Back</button>
+            </div>}
         </div>
     );
 };

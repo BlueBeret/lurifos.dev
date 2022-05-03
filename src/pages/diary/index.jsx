@@ -44,8 +44,11 @@ export default function Index(props) {
         overflow-y-auto"><div className="mx-auto w-min">
                     <Stairs />
                 </div></div>}
-            {contentDispay === "search_result" && <Content key={searchResult} data={searchResult} searchresult={true} back={() => setContentDispay('diary')} />}
-            {contentDispay === "diary" && <Content data={props.data} />}
+            <div className="items-start w-full">
+                {contentDispay === "search_result" && <Content key={searchResult} data={searchResult} searchresult={true} back={() => setContentDispay('diary')} />}
+                {contentDispay === "diary" && <Content data={props.data} />}
+            </div>
+
 
         </div>
     );

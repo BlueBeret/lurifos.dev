@@ -22,20 +22,7 @@
 }
 
 @layer components {
-  .bg-grad-lred {
-background: linear-gradient(302.02deg, #FFB1B5 -43.05%, #FFFFFF 75.37%);
-  }
-
-  .bg-grad-lblue{
-    background: linear-gradient(311.76deg, #D4E7FE -15.24%, #FFFFFF 78.85%);
-  }
-
-  .bg-grad-lyellow{
-    background: linear-gradient(302.02deg, #FFD085 -43.05%, #FFFFFF 75.37%);
-  }
-  .bg-grad-leftblue{
-    background: linear-gradient(77.58deg, #D4E7FE 1.34%, #FFFFFF 100%);
-  }
+  
 
   .content-container{
     @apply  flex flex-col flex-grow justify-center items-center ;
@@ -68,7 +55,20 @@ background: linear-gradient(302.02deg, #FFB1B5 -43.05%, #FFFFFF 75.37%);
               user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome, Edge, Opera and Firefox */
   }
+.bg-grad-lred {
+background: linear-gradient(302.02deg, #FFB1B5 -43.05%, #FFFFFF 75.37%);
+  }
 
+  .bg-grad-lblue{
+    background: linear-gradient(311.76deg, #D4E7FE -15.24%, #FFFFFF 78.85%);
+  }
+
+  .bg-grad-lyellow{
+    background: linear-gradient(302.02deg, #FFD085 -43.05%, #FFFFFF 75.37%);
+  }
+  .bg-grad-leftblue{
+    background: linear-gradient(77.58deg, #D4E7FE 1.34%, #FFFFFF 100%);
+  }
   .fillheight{
     max-height: -webkit-fill-available;
     max-height: -moz-available;
