@@ -72,12 +72,13 @@ const Content = ({ data, searchresult, back }) => {
     }
 
     return (
-        <div id="scrollable-target" className="content 
+        <div id="scrollable-target" className={`content 
         content-diary-mobile sm:content-diary
         flex flex-col items-start justify-start text-left 
         max-w-[900px] mx-auto w-full p-7 sm:p-[45px]
         overflow-y-auto
-        " ref={diary}>
+        ${styles.customscroll}`}
+            ref={diary}>
             <InfiniteScroll
                 dataLength={posts.length}
                 next={!searchresult ? getMorePost : ''}

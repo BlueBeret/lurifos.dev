@@ -1,6 +1,5 @@
 .body {
     @apply font-bold inline;
-    overflow-wrap: anywhere;
 }
 
 .body a{
@@ -18,5 +17,24 @@
 
 .body p {
     display: inline;
+}
 
+.customscroll::-webkit-scrollbar{
+    width: 5px;
+    height: 0px;
+}
+.customscroll::-webkit-scrollbar-thumb {
+    background-color: #E84C4C;
+    border-radius: 999px;
+}
+.customscroll::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.scrollable{
+    @apply max-w-full;
+}
+
+.customscroll > div:first-child {
+    @apply max-w-full
 }
