@@ -1,13 +1,12 @@
 import { getSession } from "next-auth/react"
 import { useState } from 'react'
-
+import EditDiary from '@/components/admin/EditDiary'
 const AdminPage = ({ user }) => {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
     const [secret, setSecret] = useState('')
 
     async function handleClick(e) {
-        console.log(title, body)
         const res = await fetch('/api/diary/adddiary', {
             method: 'POST',
             body: JSON.stringify({
@@ -26,17 +25,22 @@ const AdminPage = ({ user }) => {
     }
     if (user) {
         return (
-            <div className="bg-black text-black w-min p-5">
-                <form>
+            <div className="content-container items-start">
+                <div className=" text-black p-5 w-full flex flex-col">
+                    <form className="flex flex-col gap-2">
+                        <h1>Add Diary</h1>
 
+                        <input type="text" className="border-2 " name="title" placeholder="title" value={title} onChange={e => setTitle(e.target.value)} />
+                        <input type="password" name="secret" placeholder='secret' value={secret} onChange={e => setSecret(e.target.value)} />
+                        <textarea name="body" placeholder="body" className="border-2 h-[200px]" value={body} onChange={e => setBody(e.target.value)} />
+                    </form>
+                    <button onClick={handleClick} className="ml-auto bg-black text-white px-2 py-1 rounded-lg mt-2">Submit</button>
+                </div>
 
-                    <input type="text" name="title" placeholder="title" value={title} onChange={e => setTitle(e.target.value)} />
-                    <input type="password" name="secret" placeholder='secret' value={secret} onChange={e => setSecret(e.target.value)} />
-                    <textarea name="body" placeholder="body" className="h-[200px]" value={body} onChange={e => setBody(e.target.value)} />
-                </form>
-                <br></br>
-                <button onClick={handleClick} className="bg-white">Submit</button>
+                <EditDiary />
             </div>
+
+
         );
     }
 }

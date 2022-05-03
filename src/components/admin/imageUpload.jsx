@@ -83,10 +83,6 @@ export default function Home() {
                     )}
                 </form>
             </main>
-
-            <footer>
-                <p>Find the tutorial on <a href="https://spacejelly.dev/">spacejelly.dev</a>!</p>
-            </footer>
         </div>
     )
 }

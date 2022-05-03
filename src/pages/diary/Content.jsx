@@ -22,9 +22,10 @@ const Content = ({ data, searchresult, back }) => {
             `/api/diary/more?last=${utcdate}`
         );
         const newPosts = await res.json();
-        if (newPosts.length === 0) {
+        if (newPosts.length < 20) {
             setHasMore(false);
-        } else setPosts((post) => [...post, ...newPosts]);
+        }
+        setPosts((post) => [...post, ...newPosts]);
     };
 
     const toogleBody = async (e, id) => {
