@@ -28,6 +28,7 @@
     @apply  flex flex-col flex-grow justify-center items-center ;
     @apply mt-5 lg:mt-10 xl:mt-14 2xl:mt-20 ;
     @apply px-0 sm:px-7;
+    @apply max-w-full;
     @apply sm:w-[600px] md:w-[700px] lg:w-[1000px] xl:w-[1200px] 2xl:w-[1500px]  ;
   }
   .slide {

@@ -41,7 +41,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
     <SessionProvider session={session}>
       <Navbar />
-      <div className='flex flex-col justify-center'>
+      <div className='flex flex-col justify-center max-w-full'>
 
         <Component {...pageProps} className="" />
       </div>
