@@ -46,7 +46,7 @@ const Diary = (props) => {
     return `${month[dateObj.getMonth()] + ' ' + dateObj.getDate() + ', ' + dateObj.getFullYear() + ' at ' + formatAMPM(dateObj)}`
   }
 
-  return <div className='content-container items-start max-w-[1080px]'>
+  return <div className='content-container items-start max-w-[1080px] px-5'>
     <Head>
       <title>{diary.title}</title>
     </Head>
@@ -85,6 +85,7 @@ export async function getServerSideProps(context) {
     return { props: { data } }
   } catch (error) {
     console.log(error)
+    prisma.$disconnect()
     return { props: { data: [] } }
   }
 
