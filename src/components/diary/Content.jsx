@@ -100,8 +100,7 @@ const Content = ({ data, searchresult, back }) => {
                 className={styles.scrollable}
             >
                 {searchresult && posts.length > 0 && <ResultInfoCounter n={posts.length} />}
-                {posts.length === 0 && <div className="flex flex-col items-center"><Image src="/images/nothingfound.png" className="w-0 lg:w-1/2" height={400} width={400} alt="nothing found" />
-                </div>}
+
                 {posts.map((x, i) => (
                     <div key={i} className={`transition mt-3 animate-fade-in-up duration-500 ${activeDiary === x.uuid || activeDiary === null ? '' : 'opacity-20'} ${activeDiary === x.uuid ? 'scale-110 z-50' : 'scale-100'}`}>
                         <div className="flex sm:flex-row sm:justify-start sm:items-center gap-0 sm:gap-1 hover:cursor-pointer flex-wrap
@@ -132,6 +131,8 @@ const Content = ({ data, searchresult, back }) => {
 
             </InfiniteScroll>
             {!hasMore ? <NoMore /> : ""}
+            {posts.length === 0 && <div className="flex flex-col items-center w-full"><Image src="/images/nothingfound.png" className="w-0 lg:w-1/2" height={400} width={400} alt="nothing found" />
+            </div>}
             {searchresult && <div className="flex flex-col items-center w-full">
 
                 <button className="transition bg-sred rounded-lg px-2 py-1 mt-5 text-white font-semibold hover:scale-110" onClick={back}>Go Back</button>
