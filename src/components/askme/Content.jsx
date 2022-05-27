@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useRef } from 'react'
 import { MdKeyboardArrowDown } from 'react-icons/md'
-import Stairs from "@/components/loading/Stairs";
+import Stairsy from "@/components/loading/Stairsy";
 import sleep from '@/utils/sleep'
 import truncate from "@/utils/truncate";
 import ReactMarkdown from "react-markdown";
@@ -19,7 +19,7 @@ const Content = ({ data, searchresult, back }) => {
     const getMorePost = async () => {
         const utcdate = new Date(posts[posts.length - 1].timecreated).toUTCString()
         const res = await fetch(
-            `/api/diary/more?last=${utcdate}`
+            `/api/askme/more?last=${utcdate}`
         );
         const newPosts = await res.json();
         if (newPosts.length < 20) {
@@ -86,7 +86,7 @@ const Content = ({ data, searchresult, back }) => {
                 hasMore={hasMore}
                 loader={!searchresult ?
                     <div className="mx-auto w-min">
-                        <Stairs />
+                        <Stairsy />
                     </div>
                     : ''
                 }
@@ -135,7 +135,7 @@ const Content = ({ data, searchresult, back }) => {
             </div>}
             {searchresult && <div className="flex flex-col items-center w-full">
 
-                <button className="transition bg-sred rounded-lg px-2 py-1 mt-5 text-white font-semibold hover:scale-110" onClick={back}>Go Back</button>
+                <button className="transition bg-syellow rounded-lg px-2 py-1 mt-5 text-white font-semibold hover:scale-110" onClick={back}>Go Back</button>
             </div>}
         </div>
     );
