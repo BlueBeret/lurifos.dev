@@ -1,4 +1,3 @@
-
 import getLatestDiary from "@/helpers/getLatestDiary";
 import Content from "@/components/diary/Content";
 import { FaSearch } from 'react-icons/fa'

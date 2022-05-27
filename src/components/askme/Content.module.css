@@ -1,0 +1,46 @@
+.body {
+    @apply font-bold inline;
+}
+
+.body a{
+    text-decoration: underline;
+    @apply text-sblue hover:no-underline;
+}
+
+.body code {
+  font-family: Consolas,"courier new";
+  color: crimson;
+  background-color: #f1f1f1;
+  padding: 2px;
+  font-size: 105%;
+}
+
+.body p {
+    display: inline;
+}
+
+.customscroll::-webkit-scrollbar{
+    width: 7px;
+    height: 0px;
+}
+.customscroll::-webkit-scrollbar-thumb {
+    background-color: #FF858A;
+    border-radius: 999px;
+}
+
+.customscroll::-webkit-scrollbar-thumb:hover {
+    background-color: #E84C4C;
+    border-radius: 999px;
+}
+
+.customscroll::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.scrollable{
+    @apply max-w-full;
+}
+
+.customscroll > div:first-child {
+    @apply max-w-full
+}

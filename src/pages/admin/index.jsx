@@ -5,7 +5,6 @@ const AdminPage = ({ user }) => {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
     const [secret, setSecret] = useState('')
-
     async function handleClick(e) {
         const res = await fetch('/api/diary/adddiary', {
             method: 'POST',

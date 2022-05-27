@@ -17,9 +17,10 @@ model diary {
 }
 
 model qna {
-  uuid        String    @id @db.Uuid
+  uuid        String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   question    String    @db.VarChar(255)
   answer      String?
-  timecreated DateTime? @db.Timestamp(0)
-  lastedited  DateTime? @db.Timestamp(0)
+  timecreated DateTime? @default(now()) @db.Timestamp(0)
+  lastedited  DateTime? @default(now()) @db.Timestamp(0)
+  username    String?   @db.VarChar(60)
 }

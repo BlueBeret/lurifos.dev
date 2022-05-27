@@ -22,6 +22,6 @@ export default async function handler(req, res) {
     await prisma.$disconnect()
     res.status(200).json(result[0])
   } else {
-    res.status(40).redirect('/')
+    res.status(403).redirect('/')
   }
 }

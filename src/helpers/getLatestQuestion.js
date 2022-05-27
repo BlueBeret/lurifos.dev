@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client"
 export default async function getLatestDiary() {
     const prisma = new PrismaClient()
     try {
-        const data = await prisma.$queryRaw`SELECT * FROM diary ORDER BY timecreated DESC LIMIT 20`
+        const data = await prisma.$queryRaw`SELECT * FROM qna ORDER BY timecreated DESC LIMIT 20`
 
         data.map(x => {
             x.timecreated = x.timecreated.toString()
