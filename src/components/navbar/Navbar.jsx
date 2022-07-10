@@ -16,6 +16,7 @@ function Navbar(props) {
         '/': 'bg-sblue',
         '/diary': 'bg-sred',
         '/askme': 'bg-syellow',
+        '/askme/ask': 'bg-syellow',
         '/contact': 'bg-sblue'
     }
 
