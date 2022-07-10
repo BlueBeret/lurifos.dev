@@ -70,10 +70,10 @@ const Ask = ({ user }) => {
         return (
             <div className="content-container fillheight">
 
-                <div className="question-input mt-10 relative w-full max-w-[1080px]">
+                <div className="question-input mt-10 relative w-full max-w-[1080px] px-2">
                     <div className="username-input flex flex-row absolute -top-4 left-4">
                         <p ref={usernameinput} type={"text"} value={username}
-                            className="rounded-lg  bg-white px-4 py-1 z-50 hover:cursor-pointer" onClick={(e => setisAnon(!isAnon))}>{username}</p>
+                            className="rounded-lg  bg-white px-4 py-1 hover:cursor-pointer" onClick={(e => setisAnon(!isAnon))}>{username}</p>
                     </div>
                     <textarea className="rounded-lg shadow-md -z-10 py-6 px-4 w-full" placeholder="Write your question here and I'll answer it as soon as possible. Inappropriate question will be deleted."
                         value={question} onChange={(e) => setQuestion(e.target.value)}>

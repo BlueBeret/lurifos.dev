@@ -52,8 +52,10 @@ export default function Index(props) {
                     name="searchquery" value={searchQuery} onChange={handleChange}></input>
                 <button type='submit' className="searchbutton bg-syellow h-full shadow-xl rounded-r-full pl-2 pr-3 hover:cursor-pointer" ><FaSearch className="text-white h-full" /></button>
             </form>
+            <Link href="/askme/ask">
+                <a className="mt-2 rounded-lg px-2 bg-syellow text-white shadow-xl font-bold hover:scale-110 transition-all">Ask a question</a></Link>
             {contentDispay === 'searching' && <div className="content
-        content-diary-mobile sm:content-diary
+        content-askme-mobile sm:content-askme
         flex flex-col items-start text-left max-w-[900px] mx-auto p-7 sm:p-[45px]
         overflow-y-auto"><div className="mx-auto w-min">
                     <Stairs className="bg-syellow" />

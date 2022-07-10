@@ -43,6 +43,14 @@
     height: calc(100vh - 250px);
     @apply  mt-10;
   }
+  .content-askme-mobile{
+    height: calc(100vh - 300px);
+    @apply  mt-10;
+  }
+  .content-askme{
+    height: calc(100vh - 300px);
+    @apply  mt-10;
+  }
   
 }
 
