@@ -38,7 +38,7 @@ const Contact = () => {
         {
             name: "email",
             contact: "google@lurifos.dev",
-            link: "mailto:google@lurifos.dev",
+            link: "mailto: google@lurifos.dev",
             icon: <FiMail />,
             icon_color: "text-[#000]",
             bg_color: "hover:bg-[#000]",
