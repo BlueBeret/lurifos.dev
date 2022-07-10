@@ -10,13 +10,18 @@ export default async function handler(req, res) {
         const prisma = new PrismaClient()
 
         const question = req.body.question
-        const username = req.body.username
-        const result = await prisma.$queryRaw`CALL AddQuestion(${question}, ${username})`
-
+        const isAnon = req.body.isAnon
+        let username = ""
+        if (isAnon) {
+            username = "secretagent"
+        } else {
+            username = session.user.name.split(' ')[0]
+        }
+        const result = await prisma.$queryRaw`CALL addqna(${question}, ${username})`
 
         await prisma.$disconnect()
-        res.status(200).send(result)
+        res.status(200).send('success')
     } else {
-        res.status(404).redirect('/')
+        res.status(403).send('unauthorized')
     }
 }

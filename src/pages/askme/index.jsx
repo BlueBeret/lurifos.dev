@@ -3,6 +3,7 @@ import Content from "@/components/askme/Content";
 import { FaSearch } from 'react-icons/fa'
 import { useEffect, useState } from "react";
 import Stairs from "@/components/loading/Stairsy";
+import Link from "next/link";
 
 import toast, { Toaster } from "react-hot-toast";
 
@@ -21,7 +22,6 @@ export default function Index(props) {
             data => {
                 setSearchResult(data)
                 setContentDispay('search_result')
-                console.log(searchQuery)
             }
         )
 
@@ -30,18 +30,19 @@ export default function Index(props) {
 
     useEffect(() => {
         document.querySelector("body").classList.add("bg-grad-lred")
-        console.log('hello')
-        toast(
-            <div>
+        // toast(
+        //     <div>
 
-                <div className="text-sm">Click at diary title to expand or double click to open in new tab.</div>
-            </div>
+        //         <div className="text-sm">This feature is still in development, bugs are expected. If you found one, you can
+        //             <Link href="/contact"><a>contact me</a></Link> or submit it
+        //             <Link href="/bugs"><a>here</a></Link></div>
+        //     </div>
 
-            , {
-                icon: <div className="font-bold">ProTip!</div>,
-                position: "bottom-center",
-                duration: 15000
-            })
+        //     , {
+        //         icon: <div className="font-bold">ProTip!</div>,
+        //         position: "bottom-center",
+        //         duration: 15000
+        //     })
     }, []);
 
     return (

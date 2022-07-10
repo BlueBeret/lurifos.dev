@@ -19,6 +19,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     '/': "Lurifos - Programmer",
     '/diary': 'Diary',
     '/askme': 'Ask Me',
+    '/askme/ask': 'Ask Me',
     '/contact': 'Contact'
   }
 
@@ -27,6 +28,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       '/': 'bg-grad-lblue',
       '/diary': 'bg-grad-lred',
       '/askme': 'bg-grad-lyellow',
+      '/askme/ask': 'bg-grad-lyellow',
       '/contact': 'bg-grad-leftblue'
     }
     document.body.className = bodybg[router.pathname]

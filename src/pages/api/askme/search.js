@@ -12,7 +12,6 @@ export default async function handler(req, res) {
         x.lastedited = x.lastedited.toString()
         return x
     })
-    console.log(data)
 
     await prisma.$disconnect()
     res.status(200).json(data)
