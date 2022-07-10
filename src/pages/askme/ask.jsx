@@ -1,17 +1,24 @@
 import { getSession } from "next-auth/react"
 import { useState, useEffect, useRef } from "react"
 import toast, { Toaster } from 'react-hot-toast'
+import { signIn } from 'next-auth/react'
+import Image from "next/image"
 const Ask = ({ user }) => {
-    const usernamedefault = user.name.split(' ')[0].toLowerCase()
+    const usernamedefault = user.name.split(' ')[0].toLowerCase() || ""
     const [username, setUsername] = useState(usernamedefault)
     const [question, setQuestion] = useState('')
     const [isAnon, setisAnon] = useState(false)
+    const [label, setLabel] = useState('Click to hide your name')
     const usernameinput = useRef(null)
 
     useEffect(() => {
         if (isAnon) {
             setUsername('secretagent')
-        } else setUsername(usernamedefault)
+            setLabel('Click to show your name')
+        } else {
+            setUsername(usernamedefault)
+            setLabel('Click to hide your name')
+        }
 
     }, [isAnon, usernamedefault])
 
@@ -19,7 +26,7 @@ const Ask = ({ user }) => {
         toast(
             <div>
 
-                <div className="text-sm">Click at your name to make anonymous question</div>
+                <div className="text-sm">Click at your name to make it an anonymous question</div>
             </div>
 
             , {
@@ -60,10 +67,19 @@ const Ask = ({ user }) => {
 
 
 
-    if (!user) {
+    if (user.email === 'not logged in') {
 
-        return <div className="">
-            To prevent spam, you must be logged in to ask a question.
+        return <div className="content-container">
+            <div>
+                <Image src='/images/not authorized.png' alt="not authorized ilustration" width={500} height="500" objectFit="cover"></Image>
+            </div>
+            <div>
+                To prevent spam, you must be logged in to ask a question.
+            </div>
+            <div>
+                Please <span onClick={() => signIn()} className="font-bold hover:cursor-pointer hover:border-b-2 hover:border-syellow text-syellow">Sign In</span> to ask a question.
+            </div>
+
         </div>
     }
     else {
@@ -73,12 +89,12 @@ const Ask = ({ user }) => {
                 <div className="question-input mt-10 relative w-full max-w-[1080px] px-2">
                     <div className="username-input flex flex-row absolute -top-4 left-4">
                         <p ref={usernameinput} type={"text"} value={username}
-                            className="rounded-lg  bg-white px-4 py-1 hover:cursor-pointer" onClick={(e => setisAnon(!isAnon))}>{username}</p>
+                            className="rounded-lg  bg-white px-4 py-1 hover:cursor-pointer" onClick={(e => setisAnon(!isAnon))} title={label}>{username}</p>
                     </div>
                     <textarea className="rounded-lg shadow-md -z-10 py-6 px-4 w-full" placeholder="Write your question here and I'll answer it as soon as possible. Inappropriate question will be deleted."
                         value={question} onChange={(e) => setQuestion(e.target.value)}>
                     </textarea>
-                    <button onClick={submit}>submit</button>
+                    <button onClick={submit} className="float-right bg-syellow text-white font-bold py-1 px-2 rounded-lg">submit</button>
                 </div>
                 <Toaster />
             </div>
@@ -91,7 +107,10 @@ export async function getServerSideProps(context) {
     if (!session) {
         return {
             props: {
-                user: null
+                user: {
+                    name: "invalid",
+                    email: 'not logged in'
+                }
             }
         }
     }
