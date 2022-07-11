@@ -4,19 +4,13 @@ import { getSession } from 'next-auth/react';
 
 export default async function handler(req, res) {
     const session = await getSession({ req });
-    if (req.method === "POST" && session.user.email) {
+    if (req.method === "POST") {
 
 
         const prisma = new PrismaClient()
 
         const question = req.body.question
-        const isAnon = req.body.isAnon
-        let username = ""
-        if (isAnon) {
-            username = "secretagent"
-        } else {
-            username = session.user.name.split(' ')[0]
-        }
+        const username = req.body.username
         const result = await prisma.$queryRaw`CALL addqna(${question}, ${username})`
 
         await prisma.$disconnect()
