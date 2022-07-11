@@ -1,6 +1,7 @@
 import { getSession } from "next-auth/react"
 import { useState } from 'react'
 import EditDiary from '@/components/admin/EditDiary'
+import UpdateAskme from '@/components/admin/updateAskme'
 const AdminPage = ({ user }) => {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
@@ -37,6 +38,7 @@ const AdminPage = ({ user }) => {
                 </div>
 
                 <EditDiary />
+                <UpdateAskme />
             </div>
 
 
