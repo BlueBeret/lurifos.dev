@@ -67,7 +67,7 @@ const Ask = ({ user }) => {
 
 
 
-    if (user.email === 'not logged in') {
+    if (false) {
 
         return <div className="content-container">
             <div>
@@ -88,8 +88,8 @@ const Ask = ({ user }) => {
 
                 <div className="question-input mt-10 relative w-full max-w-[1080px] px-2">
                     <div className="username-input flex flex-row absolute -top-4 left-4">
-                        <p ref={usernameinput} type={"text"} value={username}
-                            className="rounded-lg  bg-white px-4 py-1 hover:cursor-pointer" onClick={(e => setisAnon(!isAnon))} title={label}>{username}</p>
+                        <input ref={usernameinput} type={"text"} value={username}
+                            className="rounded-lg  bg-white px-4 py-1 hover:cursor-pointer" onClick={(e => setisAnon(!isAnon))} title={label}></input>
                     </div>
                     <textarea className="rounded-lg shadow-md -z-10 py-6 px-4 w-full" placeholder="Write your question here and I'll answer it as soon as possible. Inappropriate question will be deleted."
                         value={question} onChange={(e) => setQuestion(e.target.value)}>
