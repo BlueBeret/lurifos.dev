@@ -2,26 +2,39 @@ import { getSession } from "next-auth/react"
 import { useState } from 'react'
 import EditDiary from '@/components/admin/EditDiary'
 import UpdateAskme from '@/components/admin/updateAskme'
+import toast, { Toaster } from 'react-hot-toast'
 const AdminPage = ({ user }) => {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
     const [secret, setSecret] = useState('')
     async function handleClick(e) {
-        const res = await fetch('/api/diary/adddiary', {
-            method: 'POST',
-            body: JSON.stringify({
-                dtitle: title,
-                dbody: body,
-                secret: secret
-            }),
-            headers: {
-                'Content-Type': 'application/json',
+        const updateDiary = new Promise(async (resolve, reject) => {
+            const res = await fetch('/api/diary/adddiary', {
+                method: 'POST',
+                body: JSON.stringify({
+                    dtitle: title,
+                    dbody: body,
+                    secret: secret
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            if (res.status === 200) {
+                resolve("Done, diary added")
+                setTitle('')
+                setBody('')
+            } else {
+                reject("Error, diary not added")
             }
+
         })
-        if (res.status === 200) {
-            setTitle('')
-            setBody('')
-        }
+
+        toast.promise(updateDiary, {
+            loading: "uploading",
+            success: data => data,
+            error: data => data
+        })
     }
     if (user) {
         return (
