@@ -4,29 +4,42 @@ import toast, { Toaster } from 'react-hot-toast'
 import { signIn } from 'next-auth/react'
 import Image from "next/image"
 const Ask = ({ user }) => {
-    const usernamedefault = user.name.split(' ')[0].toLowerCase() || ""
-    const [username, setUsername] = useState(usernamedefault)
+    const [lastUsernameValue, setLastUsernameValue] = useState(user.name.split(' ')[0].toLowerCase() || "")
+    const [username, setUsername] = useState(lastUsernameValue)
     const [question, setQuestion] = useState('')
     const [isAnon, setisAnon] = useState(false)
     const [label, setLabel] = useState('Click to hide your name')
+    const [isAlerted, setIsAlerted] = useState(false)
     const usernameinput = useRef(null)
+    const checkbox = useRef(null)
 
     useEffect(() => {
         if (isAnon) {
             setUsername('secretagent')
             setLabel('Click to show your name')
         } else {
-            setUsername(usernamedefault)
+            if (lastUsernameValue.length > 30) {
+                setLastUsernameValue(lastUsernameValue.substring(0, 30))
+                if (!isAlerted) {
+                    toast.error('Username is too long!')
+                    setIsAlerted(true)
+                    setTimeout(() => {
+                        setIsAlerted(false)
+                    }, 5000);
+                }
+            }
+
+            setUsername(lastUsernameValue)
             setLabel('Click to hide your name')
         }
 
-    }, [isAnon, usernamedefault])
+    }, [isAnon, lastUsernameValue, isAlerted])
 
     useEffect(() => {
         toast(
             <div>
 
-                <div className="text-sm">Click at your name to make it an anonymous question</div>
+                <div className="text-sm">Click on yellow circle to make it an anonymous question</div>
             </div>
 
             , {
@@ -42,7 +55,7 @@ const Ask = ({ user }) => {
                 method: 'POST',
                 body: JSON.stringify({
                     'question': question,
-                    'isAnon': isAnon
+                    'username': username,
                 }),
                 headers: {
                     'Content-Type': 'application/json',
@@ -67,7 +80,7 @@ const Ask = ({ user }) => {
 
 
 
-    if (user.email === 'not logged in') {
+    if (false) {
 
         return <div className="content-container">
             <div>
@@ -87,11 +100,12 @@ const Ask = ({ user }) => {
             <div className="content-container fillheight">
 
                 <div className="question-input mt-10 relative w-full max-w-[1080px] px-2">
-                    <div className="username-input flex flex-row absolute -top-4 left-4">
-                        <p ref={usernameinput} type={"text"} value={username}
-                            className="rounded-lg  bg-white px-4 py-1 hover:cursor-pointer" onClick={(e => setisAnon(!isAnon))} title={label}>{username}</p>
+                    <div className="username-input flex flex-row absolute -top-4 left-4 gap-2 items-center rounded-lg  bg-white">
+                        <input ref={usernameinput} type={"text"} value={username}
+                            className="rounded-lg  bg-white px-4 py-1 hover:cursor-pointer" onChange={e => { setLastUsernameValue(e.target.value) }} placeholder="name/username" disabled={isAnon}></input>
+                        <div className={`w-5 h-5 absolute right-4 rounded-full border-2 border-syellow hover:cursor-pointer ${isAnon ? 'bg-syellow' : 'bg-white '}`} ref={checkbox} onClick={e => setisAnon(!isAnon)} title={label}></div>
                     </div>
-                    <textarea className="rounded-lg shadow-md -z-10 py-6 px-4 w-full" placeholder="Write your question here and I'll answer it as soon as possible. Inappropriate question will be deleted."
+                    <textarea className={`rounded-lg shadow-md -z-10 py-6 px-4 w-full `} placeholder="Write your question here and I'll answer it as soon as possible. Inappropriate question will be deleted."
                         value={question} onChange={(e) => setQuestion(e.target.value)}>
                     </textarea>
                     <button onClick={submit} className="float-right bg-syellow text-white font-bold py-1 px-2 rounded-lg">submit</button>
@@ -108,7 +122,7 @@ export async function getServerSideProps(context) {
         return {
             props: {
                 user: {
-                    name: "invalid",
+                    name: "",
                     email: 'not logged in'
                 }
             }
