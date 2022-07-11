@@ -102,7 +102,7 @@ const Ask = ({ user }) => {
                 <div className="question-input mt-10 relative w-full max-w-[1080px] px-2">
                     <div className="username-input flex flex-row absolute -top-4 left-4 gap-2 items-center rounded-lg  bg-white">
                         <input ref={usernameinput} type={"text"} value={username}
-                            className="rounded-lg  bg-white px-4 py-1 hover:cursor-pointer" onChange={e => { setLastUsernameValue(e.target.value) }} placeholder="name/username"></input>
+                            className="rounded-lg  bg-white px-4 py-1 hover:cursor-pointer" onChange={e => { setLastUsernameValue(e.target.value) }} placeholder="name/username" disabled={isAnon}></input>
                         <div className={`w-5 h-5 absolute right-4 rounded-full border-2 border-syellow hover:cursor-pointer ${isAnon ? 'bg-syellow' : 'bg-white '}`} ref={checkbox} onClick={e => setisAnon(!isAnon)} title={label}></div>
                     </div>
                     <textarea className={`rounded-lg shadow-md -z-10 py-6 px-4 w-full `} placeholder="Write your question here and I'll answer it as soon as possible. Inappropriate question will be deleted."
