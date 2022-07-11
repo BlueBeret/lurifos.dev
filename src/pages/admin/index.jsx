@@ -1,5 +1,5 @@
 import { getSession } from "next-auth/react"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import EditDiary from '@/components/admin/EditDiary'
 import UpdateAskme from '@/components/admin/updateAskme'
 import toast, { Toaster } from 'react-hot-toast'
@@ -7,8 +7,13 @@ const AdminPage = ({ user }) => {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
     const [secret, setSecret] = useState('')
+
+    useEffect(() => {
+        document.title = 'Admin'
+    }, [])
+
     async function handleClick(e) {
-        const updateDiary = new Promise(async (resolve, reject) => {
+        const addDiary = new Promise(async (resolve, reject) => {
             const res = await fetch('/api/diary/adddiary', {
                 method: 'POST',
                 body: JSON.stringify({
@@ -30,7 +35,7 @@ const AdminPage = ({ user }) => {
 
         })
 
-        toast.promise(updateDiary, {
+        toast.promise(addDiary, {
             loading: "uploading",
             success: data => data,
             error: data => data

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { FaSearch } from "react-icons/fa"
+import toast from 'react-hot-toast'
 export default function EditDiary() {
     const [uuid, setUuid] = useState('')
     const [title, setTitle] = useState('')
@@ -12,26 +13,39 @@ export default function EditDiary() {
             .then(data => {
                 setTitle(data.title)
                 setBody(data.body)
-
+                toast.success('Done fetching diary!')
             })
     }
 
     async function updateDiary(e) {
-        const res = await fetch('/api/diary/updatediary', {
-            method: 'POST',
-            body: JSON.stringify({
-                duuid: uuid,
-                dtitle: title,
-                dbody: body,
-                secret: secret
-            }),
-            headers: {
-                'Content-Type': 'application/json',
+        const updateDiary = new Promise(async (resolve, reject) => {
+            const res = await fetch('/api/diary/updatediary', {
+                method: 'POST',
+                body: JSON.stringify({
+                    duuid: uuid,
+                    dtitle: title,
+                    dbody: body,
+                    secret: secret
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            if (res.status === 200) {
+                resolve("Done, diary updated")
+                setTitle('')
+                setBody('')
+            } else {
+                reject("Error, diary not updated")
             }
         })
-        if (res.status === 200) {
-            console.log(res)
-        }
+
+        toast.promise(updateDiary, {
+            loading: "uploading",
+            success: data => data,
+            error: data => data
+        })
+
     }
     return <div className="p-5 w-full flex flex-col items-start">
         <h1>Edit Diary</h1>
