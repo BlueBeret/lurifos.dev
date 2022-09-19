@@ -28,7 +28,7 @@
     "autoprefixer": "^10.4.4",
     "eslint": "8.23.0",
     "eslint-config-next": "12.3.0",
-    "npm": "^8.19.1",
+    "npm": "^8.19.2",
     "postcss": "^8.4.12",
     "prisma": "^4.3.1",
     "react-icons": "^4.4.0",
