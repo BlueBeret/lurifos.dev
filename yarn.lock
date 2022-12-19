@@ -17,10 +17,10 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@cloudinary/html@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@cloudinary/html/-/html-1.5.0.tgz#fac03954f99be84eddb2faf04895809171d87292"
-  integrity sha512-D9ozpUghSM2vbR6xhJ50jSFkICVd5vSwYHhTUdd3e2dAA+aUzwCeJraM5o5j4QSqzwfEoZTXhCNYYjFTnbNgYA==
+"@cloudinary/html@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@cloudinary/html/-/html-1.7.0.tgz#931e7ed61b1683de3a607d9a064dd36be42cd3e0"
+  integrity sha512-mGJhEuT7QtwjfONR+sutXTySSnJOLUk9JitkCO4t0Xa6yVCj8MsqDXLAkv6AR1XKrHa2vcEnKlGASgxtnJAfsw==
   dependencies:
     "@types/lodash.clonedeep" "^4.5.6"
     "@types/lodash.debounce" "^4.0.6"
@@ -29,12 +29,12 @@
     lodash.debounce "^4.0.8"
     typescript "^4.1.2"
 
-"@cloudinary/react@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@cloudinary/react/-/react-1.5.0.tgz#af1352a31d606f2d9fca1826273c3754682f58ca"
-  integrity sha512-yXbAC+5MoJDwFj7s5gHbNVstBmmrgiKSNenBLrC6nNu4CtkfeD3n0SReigwuTPUp5HpHtXYiuLpiOPxV3+38tg==
+"@cloudinary/react@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@cloudinary/react/-/react-1.7.0.tgz#b90f38de331bf67696595dc718b869b6d36f7e41"
+  integrity sha512-ZLdFrfolfvctyRgfspTOavqMpG7Ea8l4zszv9Vqb78ncrkNiCcKM8tVusO3+xufATx1QPiT3N9RQOlaHIWLnxQ==
   dependencies:
-    "@cloudinary/html" "^1.5.0"
+    "@cloudinary/html" "^1.7.0"
 
 "@colors/colors@1.5.0":
   version "1.5.0"
