@@ -74,7 +74,7 @@ export async function getServerSideProps(context) {
   const { uuid } = context.query
   try {
     const prisma = new PrismaClient()
-    const data = await prisma.$queryRaw`SELECT * FROM diary WHERE uuid = ${uuid}`
+    const data = await prisma.$queryRaw`SELECT * FROM diary WHERE uuid::text = ${uuid}`
     prisma.$disconnect()
 
     data.map(x => {
