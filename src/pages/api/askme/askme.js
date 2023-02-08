@@ -9,7 +9,7 @@ export default async function handler(req, res) {
         const prisma = new PrismaClient()
 
         const uuid = req.query.uuid
-        const result = await prisma.$queryRaw`SELECT * FROM qna WHERE uuid=${uuid}`
+        const result = await prisma.$queryRaw`SELECT * FROM qna WHERE uuid::text=${uuid}`
 
 
         result.map(x => {
