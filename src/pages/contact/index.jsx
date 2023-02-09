@@ -19,8 +19,8 @@ const Contact = () => {
         },
         {
             name: "twitter",
-            contact: "@knalpotkotak",
-            link: "https://twitter.com/knalpotkotak",
+            contact: "@lurifos",
+            link: "https://twitter.com/lurifos",
             icon: <FaTwitter />,
             icon_color: "text-[#1DA1F2]",
             bg_color: "hover:bg-[#1DA1F2]",
