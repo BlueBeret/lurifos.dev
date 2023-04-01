@@ -10,7 +10,7 @@
     "regen": "npx prisma db pull && npx prisma generate"
   },
   "dependencies": {
-    "@cloudinary/react": "^1.5.0",
+    "@cloudinary/react": "^1.11.2",
     "@prisma/client": "^4.7.1",
     "dotenv": "^16.0.3",
     "next": "12.3.1",
