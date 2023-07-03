@@ -28,7 +28,7 @@ const Contact = () => {
         },
         {
             name: "discord",
-            contact: "Lurifos#3482",
+            contact: "Lurifos",
             link: "#",
             icon: <SiDiscord />,
             icon_color: "text-[#7289DA]",
@@ -37,7 +37,7 @@ const Contact = () => {
         },
         {
             name: "email",
-            contact: "google@lurifos.dev",
+            contact: "me@lurifos.dev",
             link: "mailto: google@lurifos.dev",
             icon: <FiMail />,
             icon_color: "text-[#000]",
